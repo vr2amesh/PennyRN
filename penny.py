@@ -53,9 +53,13 @@ books_schema = BookSchema(many = True)
 @app.route("/penny/getAuthors", methods = ["POST"])
 def handleQuery():
 	query_string = request.json['query_string']
-	query = "%" + str(query_string) + "%"
 
-	books = Books.query.filter(Books.author.like(query))
+	if query_string == '' or query_string is None:
+		return jsonify(query_string)
+
+	query = str(query_string) + "%"
+
+	books = Books.query.filter(Books.author.like(query)).all()
 
 	return books_schema.jsonify(books)
 
