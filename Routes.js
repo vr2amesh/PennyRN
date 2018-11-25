@@ -1,11 +1,15 @@
 import React, {Component} from 'react'
-import {createStackNavigator} from 'react-navigation'
+import {
+	createStackNavigator,
+	createAppContainer
+} from 'react-navigation'
+
 
 import Home from './Home'
 import SearchForm from './SearchForm'
 
 
-const Navigator = createStackNavigator({
+const MainNavigator = createStackNavigator({
 	Home: {screen: Home},
 	SearchForm: {screen: SearchForm}
 },
@@ -13,5 +17,7 @@ const Navigator = createStackNavigator({
 	initialRouteName: 'Home',
 	headerMode: 'None'
 })
+
+const Navigator = createAppContainer(MainNavigator);
 
 export default Navigator
